@@ -6,16 +6,28 @@ package com.yfc.clark.java.test;
 
 public class ZdjxTest1 {
     public static void main(String[] args) {
-        String source = "aabcccbaaaddd";
-        int total=getTotalMoreThan3(source);
-        for(int i=0;i<total;i++){
-            if (isCharMoreThan3(source)) {
-                int[] charLessThan3 = getCharMoreThan3(source);
-                source = source.substring(0, charLessThan3[0]) + source.substring(charLessThan3[1]+1);
-            }
+        String source = "aabcccbbad";
+        //非递归实现，开始
+        //int total=getTotalMoreThan3(source);
+        //for(int i=0;i<total;i++){
+        //    if (isCharMoreThan3(source)) {
+        //        int[] charLessThan3 = getCharMoreThan3(source);
+        //        source = source.substring(0, charLessThan3[0]) + source.substring(charLessThan3[1]+1);
+        //    }
+        //}
+        //System.out.println(source+" 总共重复"+total+"次");
+        //非递归实现，结束
+        //递归实现，开始
+        String target = "111";
+        for(int j =0;j<source.length()-2;j++){
+            char a = source.charAt(j);
+            char b = source.charAt(j+1);
+            char c = source.charAt(j+2);
+            if(a==b&&b==c) target=getLessThan3(source,j,j+2);
+            else continue;
         }
-
-        System.out.println(source+" 总共重复"+total+"次");
+        System.out.println(target);
+        //递归实现，结束
     }
 
     /**
@@ -56,7 +68,7 @@ public class ZdjxTest1 {
     public static boolean isCharMoreThan3(String source) {
         boolean isCharLessThan3 = false;
         int size = source.length();
-        for (int i = 1; i < size; i++) {
+        for (int i = 0; i < size-2; i++) {
             char charOne = source.charAt(i);
             char charTwo = source.charAt(i + 1);
             char charThree = source.charAt(i + 2);
@@ -85,5 +97,32 @@ public class ZdjxTest1 {
             }
         }
         return num;
+    }
+
+    /**
+     * 递归实现
+     * @param source 源字符串
+     * @param start 连续3个相同字符初始位置
+     * @param end 连续3个相同字符末尾位置
+     * @return
+     */
+    public static String getLessThan3(String source,int start,int end){
+        if(isCharMoreThan3(source)){
+            source = source.substring(0,start)+source.substring(end+1);
+            for(int i=0;i<source.length()-2;i++){
+                char one=source.charAt(i);
+                char two=source.charAt(i+1);
+                char tree=source.charAt(i+2);
+                if(one==two&&two==tree){
+                    source = getLessThan3(source,i,i+2);
+                }
+                else continue;
+            }
+        }
+        else{
+            return source;
+        }
+        return source;
+
     }
 }
