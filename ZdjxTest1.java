@@ -19,14 +19,18 @@ public class ZdjxTest1 {
         //非递归实现，结束
         //递归实现，开始
         String target = "111";
-        for(int j =0;j<source.length()-2;j++){
-            char a = source.charAt(j);
-            char b = source.charAt(j+1);
-            char c = source.charAt(j+2);
-            if(a==b&&b==c) target=getLessThan3(source,j,j+2);
-            else continue;
+        try {
+            for(int j =0;j<source.length()-2;j++){
+                char a = source.charAt(j);
+                char b = source.charAt(j+1);
+                char c = source.charAt(j+2);
+                if(a==b&&b==c) target=getLessThan3(source,j,j+2);
+                else continue;
+            }
+            System.out.println(target);
+        }catch (Exception e){
+            e.printStackTrace();
         }
-        System.out.println(target);
         //递归实现，结束
     }
 
